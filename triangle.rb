@@ -14,8 +14,29 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+  sides = [a, b, c]
+
+  # https://stackoverflow.com/a/11361502
+  raise TriangleError if sides.min <= 0
+
+  # my original answer
+  #sides.each do |item|
+  #  if item <= 0
+  #    raise TriangleError
+  #  end
+  #end
+
+  # https://stackoverflow.com/a/11361502
+  x, y, z = sides.sort
+  raise TriangleError if x + y <= z
+
+  # my original answer
+  #if a + b <= c or b + c <= a or c + a <= b
+  #  raise TriangleError
+  #end
+
   # https://stackoverflow.com/questions/4742692/a-more-elegant-solution-to-ruby-koans-triangle-rb
-  case [a,b,c].uniq.size
+  case sides.uniq.size
   when 1 then :equilateral
   when 2 then :isosceles
   else        :scalene
